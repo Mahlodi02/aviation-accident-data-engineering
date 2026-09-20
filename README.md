@@ -1,7 +1,5 @@
 # Aviation Accidents Data Engineering Project✈️
 
-WTC-5P8K8VHY
-
 ## The problem🔥
 
 I wanted to know something specific: when a plane crashes, is there a
@@ -84,8 +82,14 @@ summaries in a 100+ year historical dataset are just terse facts
 Forcing those into a category would mean inventing information the
 data doesn't have.
 
-**4. Load (`src/load.py`)** — *in progress*
-Loads the classified data into PostgreSQL for querying.
+**4. Load (`src/load.py`)**
+Loads the classified data into the PostgreSQL `crashes` table.
+Uses `if_exists="replace"`, so the script is idempotent — safe to
+rerun any time without creating duplicates. Connection logic (reading
+`.env`, building the SQLAlchemy engine) lives in a shared `src/db.py`
+so it isn't duplicated across scripts. Verified by running the same
+`GROUP BY cause_category` query in both pandas and raw `psql` and
+confirming they match exactly.
 
 **5. Analysis** — *not started yet*
 Answering the actual question: how do these categories break down over
@@ -109,10 +113,15 @@ src/
 ingest.py - loads raw data
 clean.py - cleans and standardizes it
 classify.py - assigns cause categories
-load.py - loads into PostgreSQL
+db.py - shared database connection logic
+load.py - loads classified data into PostgreSQL
+test_connection.py - standalone script to verify the database is reachable
 
 
 ## Status
 
-🚧 In progress. Ingestion, cleaning, and classification are working
-end to end. Currently building the PostgreSQL loading step.
+🚧 In progress. The full pipeline — ingest, clean, classify, and load
+— runs end to end into PostgreSQL. Next: data quality checks, then
+analysis to answer the original question.
+
+**TrackingCod:** WTC-5P8K8VHY
