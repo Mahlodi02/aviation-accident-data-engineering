@@ -120,8 +120,40 @@ test_connection.py - standalone script to verify the database is reachable
 
 ## Status
 
-🚧 In progress. The full pipeline — ingest, clean, classify, and load
-— runs end to end into PostgreSQL. Next: data quality checks, then
-analysis to answer the original question.
+## Key Findings
+
+**Overall cause breakdown** (5,268 crashes, 1908–present):
+
+| Cause | Crashes | % |
+|---|---|---|
+| Other | 2,097 | 39.8% |
+| Weather | 1,232 | 23.4% |
+| Unknown | 554 | 10.5% |
+| Maintenance | 505 | 9.6% |
+| War/Conflict | 373 | 7.1% |
+| Pilot Error | 338 | 6.4% |
+| Hijacking/Sabotage | 89 | 1.7% |
+| Mid-Air Collision | 80 | 1.5% |
+
+**The "unexplained" share shrinks over time, but never disappears.**
+Grouping crashes by decade and looking at what percentage fall into
+Unknown or Other shows a clear trend: 77.5% in the 1920s, down to
+roughly 42–43% by the 1990s and 2000s. This lines up with how
+aviation accident investigation became far more standardized and
+thorough over the 20th century (see `outputs/charts/crashes_by_decade.png`).
+That said, it's worth being honest that this doesn't fully resolve —
+even in recent decades, over 40% of crash summaries in this dataset
+still don't state an identifiable cause. That's a property of how
+tersely some of these records are written, not something a better
+keyword list could fully fix.
+
+**Crash counts by aircraft type mostly reflect how long and how widely
+an aircraft was used, not how "dangerous" it was.** The Douglas DC-3 has
+by far the most recorded crashes of any type in this dataset (152 in its
+single largest cause category alone), but the DC-3 was also one of the
+most widely produced and longest-serving aircraft in aviation history —
+more aircraft, more total years flying, naturally means more total
+crashes recorded. See `outputs/charts/crashes_by_aircraft_type.png`
+for the full cause breakdown across the 10 most-crashed aircraft types.
 
 **TrackingCod:** WTC-5P8K8VHY
